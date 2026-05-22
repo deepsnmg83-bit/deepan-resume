@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deepan M — Software Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #1e1e2e;
+    --accent: #6ee7f7;
+    --accent2: #a78bfa;
+    --accent3: #34d399;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --highlight: #1a1a2e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* GRID LINES BG */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(110,231,247,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(110,231,247,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── HERO HEADER ── */
+  header {
+    padding: 72px 0 56px;
+    position: relative;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(44px, 9vw, 88px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent2);
+  }
+
+  .role-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .role-tag em {
+    font-style: normal;
+    color: var(--accent3);
+  }
+
+  /* CONTACT BAR */
+  .contact-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item:hover { color: var(--accent); }
+
+  .contact-item svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION ── */
+  section {
+    margin-top: 64px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  section:nth-child(2) { animation-delay: 0.1s; }
+  section:nth-child(3) { animation-delay: 0.15s; }
+  section:nth-child(4) { animation-delay: 0.2s; }
+  section:nth-child(5) { animation-delay: 0.25s; }
+  section:nth-child(6) { animation-delay: 0.3s; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  /* ── SUMMARY CARD ── */
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--accent2), var(--accent3));
+  }
+
+  .summary-card p {
+    color: #b0b0c8;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 48px;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: -48px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent2), transparent);
+  }
+
+  .exp-item:last-child::before { display: none; }
+
+  .exp-dot {
+    position: absolute;
+    left: -5px;
+    top: 6px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 12px var(--accent2);
+  }
+
+  .exp-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .exp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .exp-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent3);
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--highlight);
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .exp-location {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .exp-bullets li {
+    font-size: 13.5px;
+    color: #9595b0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .exp-tags {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    background: rgba(167,139,250,0.08);
+    border: 1px solid rgba(167,139,250,0.2);
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .tag.green {
+    color: var(--accent3);
+    background: rgba(52,211,153,0.08);
+    border-color: rgba(52,211,153,0.2);
+  }
+
+  .tag.cyan {
+    color: var(--accent);
+    background: rgba(110,231,247,0.08);
+    border-color: rgba(110,231,247,0.2);
+  }
+
+  /* ── SKILLS GRID ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .skill-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+
+  .skill-chip:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(110,231,247,0.08);
+  }
+
+  .skill-chip::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent3);
+    flex-shrink: 0;
+  }
+
+  /* ── EDU / PROJECT / COURSE ── */
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .info-card:hover { border-color: var(--accent2); }
+
+  .info-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .info-card-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .info-card-sub span { color: var(--accent3); }
+
+  .info-card p {
+    font-size: 13.5px;
+    color: #9595b0;
+    line-height: 1.65;
+  }
+
+  /* ── COMPETENCIES ── */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+
+  .comp-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #b0b0c8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .comp-item::before {
+    content: '✦';
+    color: var(--accent2);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .status-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+  }
+
+  .status-dot::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent3);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .wrapper { padding: 0 16px 60px; }
+    header { padding: 48px 0 40px; }
+    h1 { font-size: 52px; }
+    .summary-card { padding: 20px 20px; }
+    .exp-item { padding-left: 18px; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .comp-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <!-- <div class="header-eyebrow">Portfolio · Resume · 202</div> -->
+    <h1>DEEPAN <span>M</span></h1>
+    <div class="role-tag">
+      <em>↗</em> Front-End Developer &amp; Software Engineer &nbsp;·&nbsp; 2 Years Experience
+    </div>
+    <div class="contact-bar">
+      <a href="mailto:deepanmurugan083@gmail.com" class="contact-item">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        deepanmurugan083@gmail.com
+      </a>
+      <a href="tel:8637645195" class="contact-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        8637645195
+      </a>
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Chennai, India
+      </span>
+    </div>
+  </header>
+
+  <!-- SUMMARY -->
+  <section>
+    <div class="section-label">Professional Summary</div>
+    <div class="summary-card">
+      <p>Enthusiastic and dedicated Front-End Developer with <strong style="color:var(--accent)">2 years of experience</strong> in building responsive web applications, mobile apps, and dashboard solutions using <strong style="color:var(--accent2)">Angular, Ionic/React Native, HTML, CSS, JavaScript, and Node.js</strong>. Experienced in delivering scalable UI, working with APIs, and deploying applications on servers like Tomcat. Strong ability to collaborate, optimize UI/UX, and build cross-platform mobile apps for Android and iOS.</p>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="section-label">Work Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-header">
+        <div class="exp-role">Front End Developer</div>
+      </div>
+      <div class="exp-meta">
+        <span class="exp-company">SyncDigit Solutions Pvt. Ltd.</span>
+        <span class="exp-period">07/2024 – Present</span>
+        <span class="exp-location">Chennai</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Developed responsive UI screens for the <em>Maggie Plus</em> web platform using Angular / HTML / CSS / JavaScript.</li>
+        <li>Worked closely with backend teams to integrate REST APIs.</li>
+        <li>Implemented security-related UI features based on ISO, HIPAA, GDPR certifications.</li>
+        <li>Built components for dashboards, communication modules, forms, user management, and admin panels.</li>
+        <li>Contributed to performance improvements and UI consistency across modules.</li>
+        <li>Developed Student mobile app for Android &amp; iOS; built full school ERP solution with separate apps for students, staff, and admin.</li>
+        <li>Worked on Staff Login app and Admin app (both mobile &amp; web version).</li>
+        <li>Built features like attendance, homework, notifications, timetable, exams, profile, etc.</li>
+        <li>Used Ionic / React Native for hybrid app development; integrated APIs and handled authentication, routing, and navigation.</li>
+        <li>Managed builds and testing for both Android and iOS.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="tag">Angular</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag cyan">HTML/CSS</span>
+        <span class="tag cyan">JavaScript</span>
+        <span class="tag green">Ionic</span>
+        <span class="tag green">React Native</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">MySQL</span>
+        <span class="tag cyan">Bootstrap</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">BitBucket</span>
+        <span class="tag">Tomcat</span>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot" style="background:var(--accent3); box-shadow:0 0 12px var(--accent3);"></div>
+      <div class="exp-role">Software Developer</div>
+      <div class="exp-meta">
+        <span class="exp-company">All Directional Source</span>
+        <span class="exp-period">11/2023 – 06/2024</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Developed <em>CRE</em> — a lease and rental data management application.</li>
+        <li>Implemented security best practices to protect user data and software integrity.</li>
+        <li>Created <em>Throq Test</em>, a test management tool similar to Jira.</li>
+        <li>Collaborated with a team of four to ensure timely project delivery following best practices.</li>
+        <li>Participated in code reviews; wrote custom and scalable code.</li>
+        <li>Ensured all technical issues were ticketed and resolved in a timely manner.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="tag">Angular</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag cyan">HTML/CSS</span>
+        <span class="tag cyan">JavaScript</span>
+        <span class="tag cyan">jQuery</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-label">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-chip">JavaScript</div>
+      <div class="skill-chip">Angular</div>
+      <div class="skill-chip">TypeScript</div>
+      <div class="skill-chip">HTML / CSS</div>
+      <div class="skill-chip">Bootstrap</div>
+      <div class="skill-chip">Node.js</div>
+      <div class="skill-chip">Ionic</div>
+      <div class="skill-chip">React Native</div>
+      <div class="skill-chip">SQL</div>
+      <div class="skill-chip">REST API</div>
+      <div class="skill-chip">Selenium</div>
+      <div class="skill-chip">Mobile Dev</div>
+      <div class="skill-chip">Agile</div>
+      <div class="skill-chip">Git / GitHub</div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-label">Education</div>
+    <div class="info-card">
+      <div class="info-card-title">Bachelor of Engineering — Mechanical</div>
+      <div class="info-card-sub">
+        <span>Dhaanish Ahmed College of Engineering</span>
+        &nbsp;·&nbsp; 2017 – 2021 &nbsp;·&nbsp; Chennai
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <!-- <section>
+    <div class="section-label">Project</div>
+    <div class="info-card">
+      <div class="info-card-title">Netflix Login Module Framework</div>
+      <div class="info-card-sub">
+        <span>Java</span> &nbsp;·&nbsp; <span>Selenium</span>
+      </div>
+      <p>Implemented automation testing by executing 30+ test cases using Selenium and Java, improving test coverage and efficiency.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Course Completions</div>
+    <div class="info-card">
+      <div class="info-card-title">Software Automation Testing</div>
+      <div class="info-card-sub"><span>QSpider Solutions</span></div>
+      <p>Completed a comprehensive course covering software automation testing principles and tools.</p>
+    </div>
+  </section> -->
+
+  <!-- COMPETENCIES -->
+  <section>
+    <div class="section-label">Additional Competencies</div>
+    <div class="comp-grid">
+      <div class="comp-item">UI/UX Understanding</div>
+      <div class="comp-item">Mobile App Build &amp; Publishing</div>
+      <div class="comp-item">Troubleshooting &amp; Debugging</div>
+      <div class="comp-item">Version Control (Git)</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Deepan M · Software Developer</p>
+    <div class="status-dot">Open to opportunities</div>
+  </footer>
+
+</div>
+</body>
+</html>
